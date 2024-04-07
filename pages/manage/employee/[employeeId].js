@@ -151,18 +151,22 @@ export async function getStaticProps(context) {
   };
 }
 export async function getStaticPaths() {
-  const list = await employeeService.getEmployeeList();
-  const pathWithParams = list.data.data.map((e) => {
-    return {
-      params: {
-        employeeId: toString(e.employee_id),
-      },
-    };
-  });
+  try {
+    const list = await employeeService.getEmployeeList();
+    const pathWithParams = list.data.data.map((e) => {
+      return {
+        params: {
+          employeeId: String(e.employee_id),
+        },
+      };
+    });
 
-  return {
-    paths: pathWithParams,
-    fallback: true,
-  };
+    return {
+      paths: pathWithParams,
+      fallback: true,
+    };
+  } catch (er) {
+    return { paths: [], fallback: false }; // <- ADDED RETURN STMNT
+  }
 }
 export default DetailEmployee;

@@ -4,12 +4,20 @@ import React, { useState, useEffect } from "react";
 
 const EmployeePage = () => {
   let [data, setData] = useState([]);
-  const fetch = async () => {
-    let list = await employeeService.getEmployeeList();
-    setData(list.data.data);
-  };
+  // const fetch = async () => {
+  //   let list = await employeeService.getEmployeeList();
+  //   setData(list.data.data);
+  // };
   useEffect(() => {
-    fetch();
+    employeeService
+      .getEmployeeList()
+      .then((res) => {
+        console.log(res);
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
   return (
     <>
@@ -17,7 +25,6 @@ const EmployeePage = () => {
         Information of employees
       </h1>
       <div className="grid grid-cols-2 gap-5 my-4">
-        <h1>test</h1>
         {data?.map((e) => (
           <EmployeeCard
             fullName={e.fullName}
