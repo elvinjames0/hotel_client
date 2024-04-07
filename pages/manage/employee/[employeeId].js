@@ -4,6 +4,10 @@ import dynamic from "next/dynamic";
 import { employeeService } from "@/services/employeeService";
 import moment from "moment";
 import Modal from "@/components/modal";
+import ButtonCustom from "@/components/button";
+import { useRouter } from "next/router";
+import SuccessNotification from "@/components/notification/success";
+import ErrorNotification from "@/components/notification/error";
 const UpdateFormDynamic = dynamic(
   () => import("@/components/manage/employee/formUpdateInfo"),
   {
@@ -12,6 +16,25 @@ const UpdateFormDynamic = dynamic(
 );
 const DetailEmployee = ({ data }) => {
   const [isModal, setIsModal] = useState(false);
+  const [isNotification, setIsNotification] = useState(false);
+  const [notificationType, setNotificationType] = useState(null);
+  const router = useRouter();
+  const handleDeleteEmployee = async (id) => {
+    setIsNotification(true);
+    try {
+      await employeeService.deleteEmployee(id);
+      setNotificationType("success");
+      setTimeout(() => {
+        setIsNotification(false);
+        router.push("/manage/employee");
+      }, 1000);
+    } catch (error) {
+      setNotificationType("error");
+      setTimeout(() => {
+        setIsNotification(false);
+      }, 1000);
+    }
+  };
   return (
     <>
       <div className="w-full h-full">
@@ -21,6 +44,12 @@ const DetailEmployee = ({ data }) => {
           isModal={isModal}
           data={data}
         />
+        {isNotification && notificationType === "success" && (
+          <SuccessNotification content="Delete successfully" />
+        )}
+        {isNotification && notificationType === "error" && (
+          <ErrorNotification content="Error" />
+        )}
         <h1 className="text-2xl font-bold font-serif mb-3">
           {data?.fullname}'s INFORMATION
         </h1>
@@ -132,6 +161,13 @@ const DetailEmployee = ({ data }) => {
             </div>
           </div>
         </div>
+        <ButtonCustom
+          color="red"
+          content="Delete this employee"
+          onClick={() => {
+            handleDeleteEmployee(data?.employee_id);
+          }}
+        />
       </div>
     </>
   );

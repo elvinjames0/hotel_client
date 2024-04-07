@@ -9,11 +9,9 @@ const onFinish = async (values) => {
       role_id: values.role_id * 1,
       nationality: values.nationality * 1,
       base_salary: values.base_salary * 1,
-      cccd: values.cccd * 1,
       gender: values.gender == "true" ? true : false,
-      phone: values.phone * 1,
     });
-    message.success("Update successfully!");
+    message.success("Create successfully!");
   } catch (error) {
     message.error("Fail");
   }

@@ -1,22 +1,17 @@
 import React from "react";
 import { Form, Input, Select, message } from "antd";
-
 import ButtonCustom from "@/components/button";
 import { employeeService } from "@/services/employeeService";
-
 const UpdateForm = ({ isModal, setIsModal, data }) => {
-  console.log("data: ", data);
   const onFinish = async (values) => {
     try {
       setIsModal(false);
-      message.success("Update successfully!");
       await employeeService.updateEmployee(data.employee_id, {
         ...values,
         role_id: values.role_id * 1,
         base_salary: values.base_salary * 1,
-        cccd: values.cccd * 1,
-        phone: values.phone * 1,
       });
+      message.success("Update successfully!");
     } catch (error) {
       message.error("Fail");
     }

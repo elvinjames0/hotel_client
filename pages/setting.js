@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import LogOut from "@/components/logOut";
 import Modal from "@/components/modal";
 import BookingForm from "@/components/homepage/popup/booking";
 import ButtonCustom from "@/components/button";
-import InputRadio from "@/components/homepage/inputRadio";
 import { roomService } from "@/services/roomService";
+import SuccessNotification from "@/components/notification/success";
 
 const SettingPage = () => {
   useEffect(() => {
@@ -34,6 +34,7 @@ const SettingPage = () => {
         onClick={() => setIsBooking(true)}
       />
       <LogOut isModal={isModal} setIsModal={setIsModal} />
+      <SuccessNotification />
       <BookingForm isModal={isBooking} setIsModal={setIsBooking} />
     </>
   );
