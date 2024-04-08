@@ -1,8 +1,9 @@
 import axios from "axios";
 const BASE_URL = process.env.NEXT_API;
 export const httpService = axios.create({
-  baseURL: "https://hotel-management-api-7a7a6866df89.herokuapp.com/api",
-  // baseURL: BASE_URL,
+  // baseURL: "https://hotel-management-api-7a7a6866df89.herokuapp.com/api",
+  baseURL: "http://localhost:4000/api",
+  withCredentials: true,
 });
 // httpService.interceptors.request.use(
 //   function (config) {
