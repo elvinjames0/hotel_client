@@ -37,6 +37,7 @@ const pages = [
   ),
   getItem("Manage", "sub1", <UserOutlined />, [
     getItem("", "3", <Link href="/manage/employee">Employee</Link>),
+    getItem("", "9", <Link href="/manage/expenditures">Expenditures</Link>),
     getItem("", "4", <Link href="/manage/signup">Sign Up</Link>),
     getItem("", "5", <Link href="/manage/bonusFined">Bonus & Fined</Link>),
   ]),

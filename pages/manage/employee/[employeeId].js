@@ -8,17 +8,25 @@ import ButtonCustom from "@/components/button";
 import { useRouter } from "next/router";
 import SuccessNotification from "@/components/notification/success";
 import ErrorNotification from "@/components/notification/error";
-const UpdateFormDynamic = dynamic(
+const FormAddBonusFine = dynamic(
   () => import("@/components/manage/employee/formUpdateInfo"),
+  {
+    ssr: false,
+  }
+);
+const BonusFineFormDynamic = dynamic(
+  () => import("@/components/bonusFined/formUpdate"),
   {
     ssr: false,
   }
 );
 const DetailEmployee = ({ data }) => {
   const [isModal, setIsModal] = useState(false);
+  const [isAddBonusFine, setIsAddBonusFine] = useState(false);
   const [isNotification, setIsNotification] = useState(false);
   const [notificationType, setNotificationType] = useState(null);
   const router = useRouter();
+  console.log("router: ", router);
   const handleDeleteEmployee = async (id) => {
     setIsNotification(true);
     try {
@@ -39,9 +47,15 @@ const DetailEmployee = ({ data }) => {
     <>
       <div className="w-full h-full">
         <Modal setIsModal={setIsModal} isModal={isModal} />
-        <UpdateFormDynamic
+        <Modal setIsModal={setIsAddBonusFine} isModal={isAddBonusFine} />
+        <FormAddBonusFine
           setIsModal={setIsModal}
           isModal={isModal}
+          data={data}
+        />
+        <BonusFineFormDynamic
+          setIsModal={setIsAddBonusFine}
+          isModal={isAddBonusFine}
           data={data}
         />
         {isNotification && notificationType === "success" && (
@@ -166,6 +180,13 @@ const DetailEmployee = ({ data }) => {
           content="Delete this employee"
           onClick={() => {
             handleDeleteEmployee(data?.employee_id);
+          }}
+        />
+        <ButtonCustom
+          color="blue"
+          content="Bonus & Fine"
+          onClick={() => {
+            setIsAddBonusFine(true);
           }}
         />
       </div>
