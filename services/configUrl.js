@@ -3,7 +3,6 @@ const BASE_URL = process.env.NEXT_API;
 export const httpService = axios.create({
   baseURL: "https://hotel-management-server-nht.onrender.com/api",
   // baseURL: "http://localhost:4000/api",
-  withCredentials: true,
 });
 // httpService.interceptors.request.use(
 //   function (config) {
