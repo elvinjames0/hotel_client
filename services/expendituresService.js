@@ -7,4 +7,3 @@ export const expendituresService = {
   deleteExpenditures: (id) =>
     httpService.delete(`/expenditures/deleteExpenditures/${id}`),
 };
-//done

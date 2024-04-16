@@ -41,13 +41,11 @@ const pages = [
     getItem("", "4", <Link href="/manage/signup">Sign Up</Link>),
     getItem("", "5", <Link href="/manage/bonusFined">Bonus & Fined</Link>),
   ]),
-  getItem(
-    "Storage",
-    "6",
-    <Link href="/storage">
-      <ShopOutlined />
-    </Link>
-  ),
+  getItem("Storage", "sub2", <ShopOutlined />, [
+    getItem("", "10", <Link href="/storage">Storage</Link>),
+    getItem("", "11", <Link href="/storage/addToStorage">Import</Link>),
+    getItem("", "12", <Link href="/storage/historyStorage">History</Link>),
+  ]),
   getItem(
     "Calendar",
     "7",
