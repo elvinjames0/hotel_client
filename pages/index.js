@@ -5,11 +5,23 @@ import RoomInformation from "@/components/homepage/roomInfomation/roomInfomation
 import StatusRoom from "@/components/homepage/statusRoom";
 import TypeRoom from "@/components/homepage/typeRoom";
 import Modal from "@/components/modal";
-import { useState } from "react";
+import { roomService } from "@/services/roomService";
+import { useEffect, useState } from "react";
 const HomePage = () => {
   const [isModal, setIsModal] = useState(false);
   const [isConfirm, setIsConfirm] = useState(false);
   const [isStatus, setIsStatus] = useState(false);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    roomService
+      .getAllRoom()
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
@@ -43,34 +55,18 @@ const HomePage = () => {
           </div>
           <div>
             <div className=" flex flex-col gap-3">
-              <TypeRoom
-                type="1.Standard"
-                price="300.000đ"
-                quantity={15}
-                setIsModal={setIsModal}
-                setIsStatus={setIsStatus}
-              />
-              <TypeRoom
-                type="2.Superior"
-                price="350.000đ"
-                quantity={20}
-                setIsModal={setIsModal}
-                setIsStatus={setIsStatus}
-              />
-              <TypeRoom
-                type="3.Deluxe"
-                price="450.000đ"
-                quantity={18}
-                setIsModal={setIsModal}
-                setIsStatus={setIsStatus}
-              />
-              <TypeRoom
-                type="4.Suite"
-                price="600.000đ"
-                quantity={10}
-                setIsModal={setIsModal}
-                setIsStatus={setIsStatus}
-              />
+              {data.map((e, i) => {
+                return (
+                  <TypeRoom
+                    key={i}
+                    type={`${e.room_type}.${e.type_name}`}
+                    price={e.price_by_day}
+                    roomList={e.ROOM}
+                    setIsModal={setIsModal}
+                    setIsStatus={setIsStatus}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

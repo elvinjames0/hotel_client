@@ -1,10 +1,9 @@
 import { httpService } from "./configUrl";
 
 export const payrollService = {
-  getAllPayroll: () => httpService.get("/payroll/getAllPayroll"),
   addPayroll: (data) => httpService.post("/payroll/addPayroll", data),
-  paySalary: (data) => httpService.put("/payroll/paySalary", data),
-  //
+  paySalary: (data, id) => httpService.put(`/payroll/paySalary/${id}`, data),
+  getAllPayroll: () => httpService.get("/payroll/getAllPayroll"),
   getAllBonusFine: () => httpService.get("/payroll/getAllBonusFine"),
   addBonusFine: (data) => httpService.post("/payroll/addBonusFine", data),
   updateBonusFine: (id, data) =>

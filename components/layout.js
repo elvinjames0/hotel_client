@@ -40,6 +40,7 @@ const pages = [
     getItem("", "9", <Link href="/manage/expenditures">Expenditures</Link>),
     getItem("", "4", <Link href="/manage/signup">Sign Up</Link>),
     getItem("", "5", <Link href="/manage/bonusFined">Bonus & Fined</Link>),
+    getItem("", "13", <Link href="/manage/payroll">Payroll</Link>),
   ]),
   getItem("Storage", "sub2", <ShopOutlined />, [
     getItem("", "10", <Link href="/storage">Storage</Link>),

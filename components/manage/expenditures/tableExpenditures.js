@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import { convertToVnd } from "@/controller/convertToVnd";
 import { expendituresService } from "@/services/expendituresService";
+import FormAddExpenditures from "./formAddExpenditures";
 
 const columns = [
   {
@@ -52,7 +53,7 @@ const columns = [
   },
 ];
 
-const TableExpenditures = () => {
+const TableExpenditures = ({ isModal, setIsModal }) => {
   const [data, setData] = useState([]);
   let fetch = () => {
     expendituresService
@@ -84,7 +85,16 @@ const TableExpenditures = () => {
     fetch();
   }, []);
 
-  return <Table columns={columns} dataSource={data} />;
+  return (
+    <>
+      <FormAddExpenditures
+        setIsModal={setIsModal}
+        isModal={isModal}
+        fetch={fetch}
+      />
+      <Table columns={columns} dataSource={data} />
+    </>
+  );
 };
 
 export default TableExpenditures;

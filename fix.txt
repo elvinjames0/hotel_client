@@ -5,10 +5,7 @@ lỗi getStaticPaths undefined phải xử lý bằng cách bọc try catch
 note những service chưa hoàn thành
 
 billService                 3 api hard
-expendituresService         1 api (làm cái addExpenditures) easy
-payrollService              3 api medium
 serviceDetailService        3 api medium
 shiftService                2 api hard
-roomService                 6 api medium
 
-tổng chưa làm              18 api
+tổng chưa làm               8 api

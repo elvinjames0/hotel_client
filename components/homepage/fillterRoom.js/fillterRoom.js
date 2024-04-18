@@ -8,7 +8,6 @@ const FilterRoom = () => {
     chair: "false",
   };
   const [checkboxValues, setCheckboxValues] = useState({});
-  console.log("checkboxValues: ", checkboxValues);
   const handleCheckboxChange = (event) => {
     let { name } = event.target;
     setCheckboxValues((prevState) => ({
